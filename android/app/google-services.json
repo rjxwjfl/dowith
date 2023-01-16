@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "650880229074",
+    "project_id": "dowith-7ff4b",
+    "storage_bucket": "dowith-7ff4b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650880229074:android:eb291de177523de64d970b",
+        "android_client_info": {
+          "package_name": "com.dowithdev.dowith"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650880229074-i3tr392u9vga3i4soodnsigcpp8o06in.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dowithdev.dowith",
+            "certificate_hash": "f1c47d74cd3aafcaf461c67bf157b5284aec573d"
+          }
+        },
+        {
+          "client_id": "650880229074-4clf5fkocugusmgbcpridcefinh46hdn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMhb6blwQof1hKT-pn4CRyUfA5LU8iFLM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650880229074-4clf5fkocugusmgbcpridcefinh46hdn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
