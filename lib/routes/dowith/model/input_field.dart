@@ -23,16 +23,13 @@ class InputField extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 10.0),
-            child: Text(
-              title,
-              textAlign: TextAlign.left,
-              style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: AppTheme.darkerText),
-            ),
+          Text(
+            title,
+            textAlign: TextAlign.left,
+            style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: AppTheme.darkerText),
           ),
           Container(
             height: multiLine ? 202 : 52,

@@ -19,15 +19,18 @@ dependencies:
   cloud_firestore: ^4.3.1
   firebase_auth: ^4.2.5
   sqflite: ^2.2.3
-  path_provider: ^2.0.11
-  path: ^1.8.2
+  objectbox: ^1.7.0
+  objectbox_flutter_libs: any
   intl: ^0.17.0
+  path_provider: ^2.0.11
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.1
+  build_runner: ^2.3.3
+  objectbox_generator: any
 
 flutter:
 
