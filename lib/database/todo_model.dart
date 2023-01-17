@@ -1,7 +1,7 @@
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
-class DatabaseModel {
+class TodoModel {
   int? id;
   String? title;
   String? content;
@@ -16,9 +16,9 @@ class DatabaseModel {
   @Property(type: PropertyType.date)
   DateTime expireIn;
   @Property(type: PropertyType.date)
-  DateTime completedDate;
+  DateTime? completedDate;
 
-  DatabaseModel({
+  TodoModel({
     this.id,
     this.title,
     this.creator,
@@ -28,7 +28,7 @@ class DatabaseModel {
     required this.createAt,
     required this.startsIn,
     required this.expireIn,
-    required this.completedDate,
+    this.completedDate,
   });
 
   // factory DatabaseModel.fromDBJson(Map<String, dynamic> json) => DatabaseModel(

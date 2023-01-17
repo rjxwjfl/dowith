@@ -1,10 +1,6 @@
 import 'package:dowith/app_theme.dart';
-import 'package:dowith/database/bloc/bloc.dart';
-import 'package:dowith/database/bloc/repository.dart';
-import 'package:dowith/database/dao.dart';
-import 'package:dowith/database/db_model.dart';
+import 'package:dowith/database/todo_model.dart';
 import 'package:flutter/material.dart';
-
 class ScheduleListView extends StatefulWidget {
   const ScheduleListView({Key? key}) : super(key: key);
 
@@ -14,14 +10,12 @@ class ScheduleListView extends StatefulWidget {
 
 class _ScheduleListViewState extends State<ScheduleListView>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  Bloc? _bloc;
   ScrollController? _scrollController;
   DateTime? dateTime;
 
   @override
   void initState() {
     super.initState();
-    _bloc = Bloc(TodoRepository(DataAccessObject()));
     _scrollController = ScrollController();
   }
 
@@ -33,25 +27,7 @@ class _ScheduleListViewState extends State<ScheduleListView>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Material(
-      child: StreamBuilder<List<DBModel>>(
-        stream: _bloc?.todoListStream,
-        builder: (BuildContext context, AsyncSnapshot<List<DBModel>> snapshot) {
-          var streamList = snapshot.data;
-          if (streamList != null) {
-            return ListView.builder(
-              itemCount: streamList.length,
-              controller: _scrollController,
-              itemBuilder: (BuildContext context, int index) {
-                return scheduleView(streamList[index]);
-              },
-            );
-          } else {
-            return const Text("Data is Empty");
-          }
-        },
-      ),
-    );
+    return Material();
   }
 
   Widget titleUI(BuildContext context, String title) {
@@ -67,7 +43,7 @@ class _ScheduleListViewState extends State<ScheduleListView>
     );
   }
 
-  Widget scheduleView(DBModel dbModel) {
+  Widget scheduleView(TodoModel todoModel) {
     return Center(
       child: Container(
         height: 400,

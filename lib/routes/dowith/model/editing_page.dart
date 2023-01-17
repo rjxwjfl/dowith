@@ -1,5 +1,5 @@
 import 'package:dowith/app_theme.dart';
-import 'package:dowith/database/database_model.dart';
+import 'package:dowith/database/todo_model.dart';
 import 'package:dowith/main.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -14,13 +14,17 @@ class EditingPage extends StatefulWidget {
 }
 
 class _EditingPageState extends State<EditingPage> {
-  DateTime _selectDate = DateTime.now();
-  String _startAt = DateFormat("hh:mm a").format(DateTime.now()).toString();
-  String _expireIn = DateFormat("hh:mm a").format(DateTime.now()).toString();
+  DateTime _startDate = DateTime.now();
+  DateTime _endDate = DateTime.now();
+  TimeOfDay? _startAt;
+  TimeOfDay? _expireIn;
+  String _startAtString =
+      DateFormat("hh:mm a").format(DateTime.now()).toString();
+  String _expireInString =
+      DateFormat("hh:mm a").format(DateTime.now()).toString();
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _titleEditController = TextEditingController();
   final TextEditingController _contentEditController = TextEditingController();
-  final userBox = store.box<DatabaseModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -37,29 +41,72 @@ class _EditingPageState extends State<EditingPage> {
         padding: const EdgeInsets.only(left: 16, right: 16),
         child: Form(
           key: _formKey,
-          child: Column(
-            children: <Widget>[
-              InputField(
-                title: "Title",
-                hint: "제목을 입력하세요.",
-                multiLine: false,
-                controller: _titleEditController,
-              ),
-              InputField(
-                title: "Content",
-                hint: "내용을 입력하세요.",
-                multiLine: true,
-                controller: _contentEditController,
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    List<DatabaseModel> result = userBox.getAll();
-                    for (DatabaseModel db in result){
-                      print(db.id);
-                    }
-                  },
-                  child: const Text("Submit"))
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                InputField(
+                  title: "Title",
+                  hint: "제목을 입력하세요.",
+                  multiLine: false,
+                  controller: _titleEditController,
+                ),
+                InputField(
+                  title: "Content",
+                  hint: "내용을 입력하세요.",
+                  multiLine: true,
+                  controller: _contentEditController,
+                ),
+                InputField(
+                    title: "DatePicker",
+                    hint: DateFormat("yyyy년 MM월 dd일")
+                        .format(_startDate)
+                        .toString(),
+                    multiLine: false,
+                    widget: IconButton(
+                        onPressed: () {
+                          _getDatePicker();
+                        },
+                        icon: const Icon(Icons.calendar_today))),
+                Row(
+                  children: [
+                    Expanded(
+                        child: InputField(
+                            title: "Start At",
+                            hint: _startAtString,
+                            multiLine: false,
+                            widget: IconButton(
+                                onPressed: () {
+                                  _getTimePicker(isStartAt: true);
+                                },
+                                icon: const Icon(Icons.access_time)))),
+                    const SizedBox(width: 12,),
+                    Expanded(
+                      child: InputField(
+                          title: "Expire In",
+                          hint: _expireInString,
+                          multiLine: false,
+                          widget: IconButton(
+                              onPressed: () {
+                                _getTimePicker(isStartAt: false);
+                              },
+                              icon: const Icon(Icons.access_time_filled))),
+                    ),
+                  ],
+                ),
+                InkWell(
+                  onTap: (){},
+                  child: Container(
+                    height: 52,
+                    width: 208,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30.0),
+                      color: AppTheme.nearlyDarkBlue
+                      ),
+                    child: const Center(child: Text("Submit", style: TextStyle(fontSize: 20),)),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ),
@@ -67,47 +114,54 @@ class _EditingPageState extends State<EditingPage> {
   }
 
   _getDatePicker() async {
-    DateTime? _pickedDate = await showDatePicker(
+    DateTime? pickedDate = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(2000),
         lastDate: DateTime(2100));
-    if (_pickedDate != null) {
+    if (pickedDate != null) {
       setState(() {
-        _selectDate = _pickedDate;
+        _startDate = pickedDate;
+        print(pickedDate);
       });
     }
   }
 
   _getTimePicker({required bool isStartAt}) async {
-    var _pickedTime = await _showTimePicker();
+    var pickedTime = await _showTimePicker();
     // ignore: use_build_context_synchronously
-    String timeForm = _pickedTime.format(context);
-    if (_pickedTime == null) {
+    String timeForm = pickedTime.format(context);
+    if (pickedTime == null) {
     } else if (isStartAt == true) {
       setState(() {
-        _startAt = timeForm;
+        _startAt = pickedTime;
+        _startAtString = timeForm;
+        print(_startAt);
+        print(_startAtString);
       });
     } else if (isStartAt == false) {
       setState(() {
-        _expireIn = timeForm;
+        _expireIn = pickedTime;
+        _expireInString = timeForm;
+        print(_expireIn);
+        print(_expireInString);
       });
     }
   }
 
   _showTimePicker() {
     return showTimePicker(
-        initialEntryMode: TimePickerEntryMode.dialOnly,
+        initialEntryMode: TimePickerEntryMode.input,
         context: context,
         initialTime: TimeOfDay(
-            hour: int.parse(_startAt.split(":")[0]),
-            minute: int.parse(_startAt.split(":")[1].split(" ")[0])));
+            hour: int.parse(_startAtString.split(":")[0]),
+            minute: int.parse(_startAtString.split(":")[1].split(" ")[0])));
   }
 
   _validateDate() {}
 
   _addScheduleToDb() {
-    final task = DatabaseModel(
+    final task = TodoModel(
         title: _titleEditController.text,
         content: _contentEditController.text,
         state: 0,
@@ -115,6 +169,5 @@ class _EditingPageState extends State<EditingPage> {
         startsIn: DateTime.now(),
         expireIn: DateTime.now(),
         completedDate: DateTime.now());
-    userBox.put(task);
   }
 }

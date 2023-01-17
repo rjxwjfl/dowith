@@ -1,9 +1,6 @@
 import 'package:dowith/app_theme.dart';
-import 'package:dowith/database/bloc/repository.dart';
-import 'package:dowith/database/dao.dart';
 import 'package:flutter/material.dart';
 
-import '../../database/bloc/bloc.dart';
 import 'model/editing_page.dart';
 import 'object_three.dart';
 import 'object_two.dart';
@@ -20,12 +17,10 @@ class DowithHome extends StatefulWidget {
 class _DowithHomeState extends State<DowithHome>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController? _tabController;
-  Bloc? _bloc;
 
   @override
   void initState() {
     super.initState();
-    _bloc = Bloc(TodoRepository(DataAccessObject()));
     _tabController = TabController(length: 3, vsync: this);
   }
 
