@@ -14,13 +14,16 @@ class EditingPage extends StatefulWidget {
 }
 
 class _EditingPageState extends State<EditingPage> {
-  DateTime _selectDate = DateTime.now();
-  String _startAt = DateFormat("hh:mm a").format(DateTime.now()).toString();
-  String _expireIn = DateFormat("hh:mm a").format(DateTime.now()).toString();
+  final userBox = store.box<DatabaseModel>();
+  DateTime _startDate = DateTime.now();
+  DateTime _endDate = DateTime.now();
+  TimeOfDay? _startAt;
+  TimeOfDay? _expireIn;
+  String _startAtString = DateFormat("hh:mm a").format(DateTime.now()).toString();
+  String _expireInString = DateFormat("hh:mm a").format(DateTime.now()).toString();
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _titleEditController = TextEditingController();
   final TextEditingController _contentEditController = TextEditingController();
-  final userBox = store.box<DatabaseModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +77,7 @@ class _EditingPageState extends State<EditingPage> {
         lastDate: DateTime(2100));
     if (_pickedDate != null) {
       setState(() {
-        _selectDate = _pickedDate;
+        _startDate = _pickedDate;
       });
     }
   }
@@ -86,22 +89,24 @@ class _EditingPageState extends State<EditingPage> {
     if (_pickedTime == null) {
     } else if (isStartAt == true) {
       setState(() {
-        _startAt = timeForm;
+        _startAt = _pickedTime;
+        _startAtString = timeForm;
       });
     } else if (isStartAt == false) {
       setState(() {
-        _expireIn = timeForm;
+        _expireIn = _pickedTime;
+        _expireInString = timeForm;
       });
     }
   }
 
   _showTimePicker() {
     return showTimePicker(
-        initialEntryMode: TimePickerEntryMode.dialOnly,
+        initialEntryMode: TimePickerEntryMode.input,
         context: context,
         initialTime: TimeOfDay(
-            hour: int.parse(_startAt.split(":")[0]),
-            minute: int.parse(_startAt.split(":")[1].split(" ")[0])));
+            hour: int.parse(_startAtString.split(":")[0]),
+            minute: int.parse(_startAtString.split(":")[1].split(" ")[0])));
   }
 
   _validateDate() {}
@@ -112,8 +117,8 @@ class _EditingPageState extends State<EditingPage> {
         content: _contentEditController.text,
         state: 0,
         createAt: DateTime.now(),
-        startsIn: DateTime.now(),
-        expireIn: DateTime.now(),
+        startsIn: DateTime(_startDate.year, _startDate.month, _startDate.day, _startAt!.hour, _startAt!.minute),
+        expireIn: DateTime(_endDate.year, _endDate.month, _endDate.day, _expireIn!.hour, _expireIn!.minute),
         completedDate: DateTime.now());
     userBox.put(task);
   }
