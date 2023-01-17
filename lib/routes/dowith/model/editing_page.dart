@@ -14,7 +14,7 @@ class EditingPage extends StatefulWidget {
 }
 
 class _EditingPageState extends State<EditingPage> {
-  final userBox = store.box<DatabaseModel>();
+  // final userBox = store.box<DatabaseModel>();
   DateTime _startDate = DateTime.now();
   DateTime _endDate = DateTime.now();
   TimeOfDay? _startAt;
@@ -56,10 +56,10 @@ class _EditingPageState extends State<EditingPage> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    List<DatabaseModel> result = userBox.getAll();
-                    for (DatabaseModel db in result){
-                      print(db.id);
-                    }
+                    // List<DatabaseModel> result = userBox.getAll();
+                    // for (DatabaseModel db in result){
+                    //   print(db.id);
+                    // }
                   },
                   child: const Text("Submit"))
             ],
@@ -120,6 +120,6 @@ class _EditingPageState extends State<EditingPage> {
         startsIn: DateTime(_startDate.year, _startDate.month, _startDate.day, _startAt!.hour, _startAt!.minute),
         expireIn: DateTime(_endDate.year, _endDate.month, _endDate.day, _expireIn!.hour, _expireIn!.minute),
         completedDate: DateTime.now());
-    userBox.put(task);
+    // userBox.put(task);
   }
 }

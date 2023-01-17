@@ -21,7 +21,7 @@ class _ScheduleListViewState extends State<ScheduleListView>
   @override
   void initState() {
     super.initState();
-    _bloc = Bloc(TodoRepository(DataAccessObject()));
+    _bloc = Bloc(TodoRepository(TodoDao()));
     _scrollController = ScrollController();
   }
 

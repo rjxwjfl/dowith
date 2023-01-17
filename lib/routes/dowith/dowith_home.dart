@@ -25,7 +25,7 @@ class _DowithHomeState extends State<DowithHome>
   @override
   void initState() {
     super.initState();
-    _bloc = Bloc(TodoRepository(DataAccessObject()));
+    _bloc = Bloc(TodoRepository(TodoDao()));
     _tabController = TabController(length: 3, vsync: this);
   }
 

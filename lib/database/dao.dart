@@ -2,7 +2,7 @@
 import 'db_model.dart';
 import 'db_provider.dart';
 
-class DataAccessObject{
+class TodoDao{
   final dbProvider = DBProvider.provider;
 
   Future<List<DBModel>> getTodoDB() async {

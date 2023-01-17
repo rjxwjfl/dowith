@@ -1,4 +1,5 @@
 import 'package:dowith/app_main.dart';
+import 'package:dowith/database/database_provider.dart';
 import 'package:dowith/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

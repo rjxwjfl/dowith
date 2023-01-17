@@ -2,7 +2,7 @@ import 'package:dowith/database/dao.dart';
 import 'package:dowith/database/db_model.dart';
 
 class TodoRepository{
-  final DataAccessObject _todoDao;
+  final TodoDao _todoDao;
 
   TodoRepository(this._todoDao);
   Future<List<DBModel>> getTodoList() => _todoDao.getTodoDB();

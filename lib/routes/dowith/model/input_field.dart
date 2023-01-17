@@ -65,6 +65,9 @@ class InputField extends StatelessWidget {
                         ),
                       ),
                     ),
+                    onSaved: (value){
+
+                    },
                   ),
                 ),
                 widget == null ? Container() : Container(child: widget),
