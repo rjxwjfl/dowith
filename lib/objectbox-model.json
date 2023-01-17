@@ -1,0 +1,101 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "3:573647650611521122",
+      "lastPropertyId": "10:1268740778292958370",
+      "name": "TodoModel",
+      "properties": [
+        {
+          "id": "1:5318868690022170203",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2683307791577037100",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "3:6972101056917399873",
+          "name": "content",
+          "type": 9
+        },
+        {
+          "id": "4:78446440840707351",
+          "name": "comment",
+          "type": 9
+        },
+        {
+          "id": "5:6278811027927537241",
+          "name": "creator",
+          "type": 9
+        },
+        {
+          "id": "6:9005301374344219935",
+          "name": "state",
+          "type": 6
+        },
+        {
+          "id": "7:7728546705892119016",
+          "name": "createAt",
+          "type": 10
+        },
+        {
+          "id": "8:4509507200678264103",
+          "name": "startsIn",
+          "type": 10
+        },
+        {
+          "id": "9:7158826576794077250",
+          "name": "expireIn",
+          "type": 10
+        },
+        {
+          "id": "10:1268740778292958370",
+          "name": "completedDate",
+          "type": 10
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:573647650611521122",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [
+    1326021187744953862,
+    6574697286198622392
+  ],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    3339929349058017062,
+    5241416237657681506,
+    894100788895557742,
+    4513822359293744826,
+    6376343776824299752,
+    3184708448007306210,
+    659732086091768920,
+    1845829850960162835,
+    7633472894316341326,
+    6391274944070215562,
+    3140762981489713506,
+    5940252142524573282,
+    379186311586135500,
+    7486838497144575629,
+    197246163313310205,
+    3420210468676181353,
+    4986515747100674202,
+    5663949892823302777,
+    3548368112789430394,
+    1733843927460992459
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}
