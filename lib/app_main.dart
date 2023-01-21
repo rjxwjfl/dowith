@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'routes/category2/category2.dart';
@@ -13,7 +12,6 @@ class AppHome extends StatefulWidget {
 }
 
 class _AppHomeState extends State<AppHome> {
-
   late List<Widget> _pageList;
   late PageController _pageController;
   var _selectedIndex;

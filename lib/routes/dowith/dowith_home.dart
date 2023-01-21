@@ -1,7 +1,6 @@
 import 'package:dowith/app_theme.dart';
 import 'package:flutter/material.dart';
 
-import 'model/editing_page.dart';
 import 'object_three.dart';
 import 'object_two.dart';
 import 'schedule_list_view.dart';
@@ -64,16 +63,6 @@ class _DowithHomeState extends State<DowithHome>
           ObjectTwo(),
           ObjectThree(),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const EditingPage()));
-        },
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0)
-        ),
-        backgroundColor: AppTheme.dismissibleBackground,
-        child: const Icon(Icons.add),
       ),
     );
   }
